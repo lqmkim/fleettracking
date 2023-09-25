@@ -103,7 +103,7 @@ export default function ProtectedLayout({
                     <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                        src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
                         alt="Your Company"
                       />
                     </div>
@@ -148,7 +148,7 @@ export default function ProtectedLayout({
             <div className="flex h-16 shrink-0 items-center">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=500"
                 alt="Your Company"
               />
             </div>

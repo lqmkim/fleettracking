@@ -114,7 +114,7 @@ export default function NewUSVPanel() {
                               type="text"
                               name="project-name"
                               id="project-name"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                             />
                           </div>
                         </div>
@@ -134,7 +134,7 @@ export default function NewUSVPanel() {
                               id="project-description"
                               name="project-description"
                               rows={3}
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                               defaultValue={""}
                             />
                           </div>
@@ -165,7 +165,7 @@ export default function NewUSVPanel() {
 
                               <button
                                 type="button"
-                                className="relative inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 border-dashed border-gray-200 bg-white text-gray-400 hover:border-gray-300 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="relative inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 border-dashed border-gray-200 bg-white text-gray-400 hover:border-gray-300 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                               >
                                 <span className="absolute -inset-2" />
                                 <span className="sr-only">Add team member</span>
@@ -196,7 +196,7 @@ export default function NewUSVPanel() {
                                     name="privacy"
                                     aria-describedby="public-access-description"
                                     type="radio"
-                                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-600"
                                     defaultChecked
                                   />
                                 </div>
@@ -222,7 +222,7 @@ export default function NewUSVPanel() {
                                     name="privacy"
                                     aria-describedby="restricted-access-description"
                                     type="radio"
-                                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-600"
                                   />
                                 </div>
                                 <div className="pl-7 text-sm leading-6">
@@ -248,7 +248,7 @@ export default function NewUSVPanel() {
                                     name="privacy"
                                     aria-describedby="private-access-description"
                                     type="radio"
-                                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-600"
                                   />
                                 </div>
                                 <div className="pl-7 text-sm leading-6">
@@ -273,10 +273,10 @@ export default function NewUSVPanel() {
                               <div>
                                 <a
                                   href="#"
-                                  className="group flex items-center space-x-2.5 text-sm font-medium text-indigo-600 hover:text-indigo-900"
+                                  className="group flex items-center space-x-2.5 text-sm font-medium text-teal-600 hover:text-teal-900"
                                 >
                                   <LinkIcon
-                                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-900"
+                                    className="h-5 w-5 text-teal-500 group-hover:text-teal-900"
                                     aria-hidden="true"
                                   />
                                   <span>Copy link</span>
@@ -312,7 +312,7 @@ export default function NewUSVPanel() {
                         </button>
                         <button
                           type="submit"
-                          className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          className="inline-flex justify-center rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
                         >
                           Create
                         </button>
