@@ -1,0 +1,126 @@
+{
+  "users": [
+    { "id": 1, "name": "Luqman Alhakim", "email": "hakim19jan@gmail.com", "role": "Fleet manager" },
+    { "id": 2, "name": "John Doe", "email": "johndoe@example.com", "role": "Operator" },
+    { "id": 3, "name": "Ali Abdaal", "email": "aliabdaal@example.com", "role": "Maintenance personnel" }
+  ],
+
+
+
+  "usvs": [
+    {
+      "id": 1,
+      "name": "Suraya 1",
+      "latitude": 3.23542,
+      "longitude": 101.75081,
+      "speed": 30,
+      "heading": 180,
+      "status": "Parked"
+    },
+    {
+      "name": "Suraya 2",
+      "latitude": 3.23542,
+      "longitude": 101.75081,
+      "speed": 30,
+      "heading": 180,
+      "status": "Parked",
+      "id": 2
+    },
+    {
+      "name": "Suraya 3",
+      "latitude": 3.23542,
+      "longitude": 101.75081,
+      "speed": 30,
+      "heading": 180,
+      "status": "Parked",
+      "id": 3
+    }
+  ],
+  "gpsData": [
+    {"usvId":1,"timestamp":"2023-04-15 18:25:50.707163","longitude":"148.602","latitude":"44.7653","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-11-13 11:36:19.008900","longitude":"173.995","latitude":"18.0328","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-05-27 12:15:59.100158","longitude":"-153.902","latitude":"-59.967","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-01-06 15:30:04.363116","longitude":"164.505","latitude":"-22.2863","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-02-07 02:37:13.312339","longitude":"-5.13195","latitude":"-15.9326","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-06-05 15:30:50.859125","longitude":"55.167","latitude":"65.5319","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-07 17:44:29.851278","longitude":"-120.012","latitude":"-81.9294","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-03-27 09:44:48.199865","longitude":"104.31","latitude":"-34.796","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-10-27 05:15:52.222139","longitude":"-20.9537","latitude":"72.9396","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-08-31 19:24:58.358727","longitude":"44.1966","latitude":"-12.5708","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-15 18:25:50.707163","longitude":"148.602","latitude":"44.7653","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-11-13 11:36:19.008900","longitude":"173.995","latitude":"18.0328","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-05-27 12:15:59.100158","longitude":"-153.902","latitude":"-59.967","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-15 18:25:50.707163","longitude":"148.602","latitude":"44.7653","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-11-13 11:36:19.008900","longitude":"173.995","latitude":"18.0328","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-05-27 12:15:59.100158","longitude":"-153.902","latitude":"-59.967","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-01-06 15:30:04.363116","longitude":"164.505","latitude":"-22.2863","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-15 18:25:50.707163","longitude":"148.602","latitude":"44.7653","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-11-13 11:36:19.008900","longitude":"173.995","latitude":"18.0328","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-05-27 12:15:59.100158","longitude":"-153.902","latitude":"-59.967","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-01-06 15:30:04.363116","longitude":"164.505","latitude":"-22.2863","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-02-07 02:37:13.312339","longitude":"-5.13195","latitude":"-15.9326","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-06-05 15:30:50.859125","longitude":"55.167","latitude":"65.5319","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-07 17:44:29.851278","longitude":"-120.012","latitude":"-81.9294","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-03-27 09:44:48.199865","longitude":"104.31","latitude":"-34.796","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-10-27 05:15:52.222139","longitude":"-20.9537","latitude":"72.9396","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-15 18:25:50.707163","longitude":"148.602","latitude":"44.7653","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-11-13 11:36:19.008900","longitude":"173.995","latitude":"18.0328","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-05-27 12:15:59.100158","longitude":"-153.902","latitude":"-59.967","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-01-06 15:30:04.363116","longitude":"164.505","latitude":"-22.2863","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-02-07 02:37:13.312339","longitude":"-5.13195","latitude":"-15.9326","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-06-05 15:30:50.859125","longitude":"55.167","latitude":"65.5319","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-07 17:44:29.851278","longitude":"-120.012","latitude":"-81.9294","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-03-27 09:44:48.199865","longitude":"104.31","latitude":"-34.796","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-10-27 05:15:52.222139","longitude":"-20.9537","latitude":"72.9396","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-04-15 18:25:50.707163","longitude":"148.602","latitude":"44.7653","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-11-13 11:36:19.008900","longitude":"173.995","latitude":"18.0328","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-05-27 12:15:59.100158","longitude":"-153.902","latitude":"-59.967","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-01-06 15:30:04.363116","longitude":"164.505","latitude":"-22.2863","speed":"0","heading":"0"},
+    {"usvId":1,"timestamp":"2023-02-07 02:37:13.312339","longitude":"-5.13195","latitude":"-15.9326","speed":"0","heading":"0"}
+  ],
+
+
+
+  "missions": [
+    {
+      "id": 1,
+      "objective": "Testing Suraya 1",
+      "usvId": 1,
+      "userId": 1,
+      "scheduledAt": "2023-04-15 18:25:50.707163"
+    },
+    {
+      "id": 2,
+      "objective": "Testing Suraya 2",
+      "usvId": 2,
+      "userId": 1,
+      "scheduledAt": "2023-04-15 18:25:50.707163"
+    }
+  ],
+  "diagnostics": [
+    {
+      "id": 1,
+      "usvId": 1,
+      "userId": 3,
+      "repairJob": "Lorem ipsum dolor sit amet",
+      "actions": "Lorem ipsum dolor sit amet",
+      "timestamp":"2023-01-06 15:30:04.363116"
+    },
+    {
+      "id": 2,
+      "usvId": 1,
+      "userId": 3,
+      "repairJob": "Lorem ipsum dolor sit amet",
+      "actions": "Lorem ipsum dolor sit amet",
+      "timestamp":"2023-02-06 15:30:04.363116"
+    },
+    {
+      "id": 3,
+      "usvId": 3,
+      "userId": 3,
+      "repairJob": "Lorem ipsum dolor sit amet",
+      "actions": "Lorem ipsum dolor sit amet",
+      "timestamp":"2023-03-06 15:30:04.363116"
+    }
+  ]
+}
