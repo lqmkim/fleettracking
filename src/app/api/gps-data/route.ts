@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const connection = await createConnection({
-      host: "45.127.5.17",
-      database: "fleet",
-      user: "hakim19jan",
-      password: "hakim19jan",
+      host: process.env.DB_HOST,
+      database: process.env.DB_DATABASE,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
     });
 
     const [results] = await connection.execute("SELECT * FROM gps_data");
