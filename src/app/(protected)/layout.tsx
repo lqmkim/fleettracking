@@ -16,15 +16,15 @@ import Link from "next/link";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
-  { name: "Fleet Monitoring", href: "/fleets", icon: MapPinIcon },
+  { name: "USVs", href: "/usvs", icon: MapPinIcon },
   {
-    name: "Mission Management",
+    name: "Missions",
     href: "/missions",
     icon: GlobeAsiaAustraliaIcon,
   },
   {
-    name: "Maintenance & Diagnostic",
-    href: "/diagnostics",
+    name: "Maintenances",
+    href: "/maintenances",
     icon: Cog6ToothIcon,
   },
   // { name: "Report & Analytics", href: "/analytics", icon: ChartPieIcon },

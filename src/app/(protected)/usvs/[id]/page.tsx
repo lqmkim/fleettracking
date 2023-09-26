@@ -1,21 +1,24 @@
 "use client";
 
-import useUsvs from "@/hooks/useUsvs";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { useCallback, useState } from "react";
-import NewUSVPanel from "./NewUSVPanel";
-
-const containerStyle = { width: "100%", height: "100%" };
+import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
+import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import useGoogleMapsLoader from "@/utils/client/useGoogleMapsLoader";
+import useUsvData from "@/hooks/useUsvData";
+import moment from "moment";
 
 const center = { lat: 3.23542, lng: 101.75081 };
 
-export default function FleetsPage() {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: "AIzaSyAaM-eD7RxXJNSkZzbN4iy-bJZwMNunOiE",
-  });
+const polylineOptions = {
+  strokeColor: "#FF0000",
+  strokeOpacity: 1.0,
+  strokeWeight: 2,
+};
 
-  const { usvs } = useUsvs();
+export default function FleetPage({ params }: { params: any }) {
+  const { isLoaded } = useGoogleMapsLoader();
+
+  const { usvData, mutate } = useUsvData(params.id);
 
   const [map, setMap] = useState(null);
 
@@ -30,20 +33,49 @@ export default function FleetsPage() {
     setMap(null);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      mutate();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <div className="h-80 overflow-hidden rounded-lg bg-white shadow">
         {isLoaded && (
           <GoogleMap
-            mapContainerStyle={containerStyle}
+            mapContainerStyle={{ width: "100%", height: "100%" }}
             // @ts-ignore
-            // center={path?.[0] || center}
-            center={center}
-            zoom={15}
+            center={
+              usvData?.[0]
+                ? {
+                    lat: usvData?.[0].latitude / 100,
+                    lng: usvData?.[0].longitude / 100,
+                  }
+                : center
+            }
+            zoom={10}
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            {/*  */}
+            <Polyline
+              path={usvData?.map((x) => ({
+                lat: x.latitude / 100,
+                lng: x.longitude / 100,
+              }))}
+              options={polylineOptions}
+            />
+
+            {usvData?.map((data, index) => (
+              <Marker
+                key={index}
+                position={{
+                  lat: data.latitude / 100,
+                  lng: data.longitude / 100,
+                }}
+              />
+            ))}
           </GoogleMap>
         )}
       </div>
@@ -60,14 +92,14 @@ export default function FleetsPage() {
                 heading information.
               </p>
             </div>
-            <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+            {/* <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
               <button
                 type="button"
                 className="block rounded-md bg-teal-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
               >
-                Add USV
+                Add CSV records
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -78,12 +110,6 @@ export default function FleetsPage() {
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
                         Location
                       </th>
@@ -103,41 +129,47 @@ export default function FleetsPage() {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Status
+                        Timestamp
                       </th>
                       <th
                         scope="col"
                         className="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8"
                       >
-                        <span className="sr-only">Details</span>
+                        <span className="sr-only">Show</span>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {usvs?.map((usv) => (
-                      <tr key={usv.name}>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                          {usv.name}
+                    {(usvData || []).map((item) => (
+                      <tr key={item.name}>
+                        <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6 lg:pl-8">
+                          {(item.latitude / 100).toFixed(5) +
+                            ", " +
+                            (item.longitude / 100).toFixed(5)}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {usv.latitude + ", " + usv.longitude}
+                        <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
+                          {item.speed.toFixed(2)}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {usv.speed}
+                        <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
+                          {item.heading.toFixed(2)}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {usv.heading}
+                        <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
+                          {moment(item.timestamp).calendar()}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {usv.status}
-                        </td>
-                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                          <a
-                            href="#"
+                        <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                          <button
+                            onClick={() =>
+                              // @ts-ignore
+                              map?.panTo({
+                                lat: item.latitude / 100,
+                                lng: item.longitude / 100,
+                              })
+                            }
                             className="text-teal-600 hover:text-teal-900"
                           >
-                            Details<span className="sr-only">, {usv.name}</span>
-                          </a>
+                            Show
+                            <span className="sr-only">, {item.name}</span>
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -148,7 +180,6 @@ export default function FleetsPage() {
           </div>
         </div>
       </div>
-      {/* <NewUSVPanel /> */}
     </div>
   );
 }
