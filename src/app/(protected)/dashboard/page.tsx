@@ -1,50 +1,54 @@
+"use client";
+
+import useStats from "@/hooks/useStats";
+import useUsvs from "@/hooks/useUsvs";
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
 import {
   CursorArrowRaysIcon,
-  EnvelopeOpenIcon,
+  MapPinIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
-
-const stats = [
-  {
-    id: 1,
-    name: "Total Subscribers",
-    stat: "71,897",
-    icon: UsersIcon,
-    change: "122",
-    changeType: "increase",
-  },
-  {
-    id: 2,
-    name: "Avg. Open Rate",
-    stat: "58.16%",
-    icon: EnvelopeOpenIcon,
-    change: "5.4%",
-    changeType: "increase",
-  },
-  {
-    id: 3,
-    name: "Avg. Click Rate",
-    stat: "24.57%",
-    icon: CursorArrowRaysIcon,
-    change: "3.2%",
-    changeType: "decrease",
-  },
-];
+import Link from "next/link";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function DashboardPage() {
+  const { stats } = useStats();
+
+  const statsDisplay = [
+    {
+      id: 1,
+      name: "Total Users",
+      stat: stats?.totalUsers || "-",
+      icon: UsersIcon,
+      href: "/users",
+    },
+    {
+      id: 2,
+      name: "Total USVs",
+      stat: stats?.totalUsvs || "-",
+      icon: MapPinIcon,
+      href: "/usvs",
+    },
+    {
+      id: 3,
+      name: "Total Data Points",
+      stat: stats?.totalDataPoints || "-",
+      icon: CursorArrowRaysIcon,
+      href: "/usvs",
+    },
+  ];
+
   return (
     <div>
-      <h3 className="text-base font-semibold leading-6 text-gray-900">
+      {/* <h3 className="text-base font-semibold leading-6 text-gray-900">
         Last 30 days
-      </h3>
+      </h3> */}
 
-      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map((item) => (
+      <dl className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {statsDisplay.map((item) => (
           <div
             key={item.id}
             className="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
@@ -61,43 +65,14 @@ export default function DashboardPage() {
               <p className="text-2xl font-semibold text-gray-900">
                 {item.stat}
               </p>
-              <p
-                className={classNames(
-                  item.changeType === "increase"
-                    ? "text-green-600"
-                    : "text-red-600",
-                  "ml-2 flex items-baseline text-sm font-semibold"
-                )}
-              >
-                {item.changeType === "increase" ? (
-                  <ArrowUpIcon
-                    className="h-5 w-5 flex-shrink-0 self-center text-green-500"
-                    aria-hidden="true"
-                  />
-                ) : (
-                  <ArrowDownIcon
-                    className="h-5 w-5 flex-shrink-0 self-center text-red-500"
-                    aria-hidden="true"
-                  />
-                )}
-
-                <span className="sr-only">
-                  {" "}
-                  {item.changeType === "increase"
-                    ? "Increased"
-                    : "Decreased"}{" "}
-                  by{" "}
-                </span>
-                {item.change}
-              </p>
               <div className="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    href={item.href}
                     className="font-medium text-teal-600 hover:text-teal-500"
                   >
                     View all<span className="sr-only"> {item.name} stats</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </dd>

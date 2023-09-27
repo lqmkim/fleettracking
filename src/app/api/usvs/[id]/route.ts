@@ -37,6 +37,9 @@ export async function PATCH(request: Request, { params }: any) {
 }
 
 export async function DELETE(request: Request, { params }: any) {
+  const user = await getUser();
+  if (!user) return NextResponse.json({}, { status: 401 });
+
   const db = await getDb();
 
   await db.execute(

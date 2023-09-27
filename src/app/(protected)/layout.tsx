@@ -52,14 +52,6 @@ export default function ProtectedLayout({
     if (!user && !isValidating) router.push("/login");
   }, [user, isValidating]);
 
-  const updatedNavigation =
-    user?.privilege === 1
-      ? [
-          ...navigation,
-          { name: "Create New User", href: "/register", icon: UserPlusIcon },
-        ]
-      : navigation;
-
   return (
     <>
       <div className="min-h-screen bg-gray-100">
@@ -173,7 +165,7 @@ export default function ProtectedLayout({
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
-                    {updatedNavigation.map((item) => (
+                    {navigation.map((item) => (
                       <li key={item.name}>
                         <Link
                           href={item.href}
@@ -195,11 +187,8 @@ export default function ProtectedLayout({
                   </ul>
                 </li>
                 <li className="-mx-6 mt-auto">
-                  <button
-                    onClick={async () => {
-                      await axios.delete("/api/auth/logout");
-                      router.push("/");
-                    }}
+                  <Link
+                    href="/profile"
                     className="w-full flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
                   >
                     {user && (
@@ -211,7 +200,7 @@ export default function ProtectedLayout({
                     )}
                     <span className="sr-only">Your profile</span>
                     <span aria-hidden="true">{user?.username}</span>
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -230,13 +219,15 @@ export default function ProtectedLayout({
           <div className="flex-1 text-sm font-semibold leading-6 text-white">
             Dashboard
           </div>
-          <Link href="#">
+          <Link href="/profile">
             <span className="sr-only">Your profile</span>
-            <img
-              className="h-8 w-8 rounded-full bg-gray-800"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+            {user && (
+              <img
+                className="h-8 w-8 rounded-full bg-gray-800"
+                src={`https://ui-avatars.com/api/${user.username}/128/random`}
+                alt=""
+              />
+            )}
           </Link>
         </div>
 

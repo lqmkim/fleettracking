@@ -2,9 +2,16 @@
 
 import useMissions from "@/hooks/useMissions";
 import moment from "moment";
+import { useState } from "react";
+import DeleteMissionModal from "./DeleteMissionModal";
+import NewMissionModal from "./NewMissionModal";
 
 export default function MissionsPage() {
   const { missions } = useMissions();
+
+  const [selectedMission, setSelectedMission] = useState(null);
+  const [openNewModal, setOpenNewModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -21,6 +28,7 @@ export default function MissionsPage() {
           <button
             type="button"
             className="block rounded-md bg-teal-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+            onClick={() => setOpenNewModal(true)}
           >
             Add mission
           </button>
@@ -57,7 +65,7 @@ export default function MissionsPage() {
                     Manager
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                    <span className="sr-only">View waypoints</span>
+                    <span className="sr-only">Actions</span>
                   </th>
                 </tr>
               </thead>
@@ -68,19 +76,25 @@ export default function MissionsPage() {
                       {mission.objective}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {mission.usv.name}
+                      {mission.usv_name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {moment(mission.scheduledAt).calendar()}
+                      {moment(mission.scheduled_at).calendar()}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {mission.user.name}
+                      {mission.manager_username}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href="#" className="text-teal-600 hover:text-teal-900">
-                        View waypoints
-                        <span className="sr-only">, {mission.name}</span>
-                      </a>
+                      <button
+                        onClick={() => {
+                          setSelectedMission(mission);
+                          setOpenDeleteModal(true);
+                        }}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Delete
+                        <span className="sr-only">, {mission.objective}</span>
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -89,6 +103,14 @@ export default function MissionsPage() {
           </div>
         </div>
       </div>
+
+      <DeleteMissionModal
+        open={openDeleteModal}
+        setOpen={setOpenDeleteModal}
+        mission={selectedMission}
+      />
+
+      <NewMissionModal open={openNewModal} setOpen={setOpenNewModal} />
     </div>
   );
 }

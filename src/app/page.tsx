@@ -143,12 +143,12 @@ export default function IndexPage() {
                   occaecat fugiat aliqua.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
-                  <Link
+                  <a
                     href="/dashboard"
                     className="rounded-md bg-teal-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
                   >
                     Get started
-                  </Link>
+                  </a>
                   <Link
                     href="#"
                     className="text-sm font-semibold leading-6 text-gray-900"
