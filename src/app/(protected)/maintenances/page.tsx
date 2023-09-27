@@ -2,9 +2,16 @@
 
 import useMaintenances from "@/hooks/useMaintenances";
 import moment from "moment";
+import { useState } from "react";
+import NewMaintenanceModal from "./NewMaintenanceModal";
+import DeleteMaintenanceModal from "./DeleteMaintenanceModal";
 
 export default function MaintenancesPage() {
   const { maintenances } = useMaintenances();
+
+  const [selectedMaintenance, setSelectedMaintenance] = useState(null);
+  const [openNewModal, setOpenNewModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -21,6 +28,7 @@ export default function MaintenancesPage() {
           <button
             type="button"
             className="block rounded-md bg-teal-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+            onClick={() => setOpenNewModal(true)}
           >
             Add maintenance
           </button>
@@ -71,25 +79,33 @@ export default function MaintenancesPage() {
                 {maintenances?.map((maintenance) => (
                   <tr key={maintenance.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {maintenance.usv.name}
+                      {maintenance.usv_name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {maintenance.repairJob}
+                      {maintenance.repair_job}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {maintenance.actions}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {maintenance.user.name}
+                      {maintenance.maintenance_personnel_username}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {moment(maintenance.timestamp).calendar()}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href="#" className="text-teal-600 hover:text-teal-900">
-                        Details
-                        <span className="sr-only">, {maintenance.name}</span>
-                      </a>
+                      <button
+                        onClick={() => {
+                          setSelectedMaintenance(maintenance);
+                          setOpenDeleteModal(true);
+                        }}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Delete
+                        <span className="sr-only">
+                          , {maintenance.repair_job}
+                        </span>
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -98,6 +114,14 @@ export default function MaintenancesPage() {
           </div>
         </div>
       </div>
+
+      <DeleteMaintenanceModal
+        open={openDeleteModal}
+        setOpen={setOpenDeleteModal}
+        maintenance={selectedMaintenance}
+      />
+
+      <NewMaintenanceModal open={openNewModal} setOpen={setOpenNewModal} />
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import getDb from "@/utils/server/getDb";
 import getUser from "@/utils/server/getUser";
-import { genSalt, hash } from "bcrypt";
-import moment from "moment";
 import { NextResponse } from "next/server";
 import { validate } from "validate.js";
 
