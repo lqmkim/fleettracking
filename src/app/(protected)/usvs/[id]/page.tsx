@@ -6,6 +6,9 @@ import Link from "next/link";
 import useGoogleMapsLoader from "@/utils/client/useGoogleMapsLoader";
 import useUsvData from "@/hooks/useUsvData";
 import moment from "moment";
+import useUsv from "@/hooks/useUsv";
+import EditUSVModal from "./EditUSVModal";
+import DeleteUSVModal from "./DeleteUSVModal";
 
 const center = { lat: 3.23542, lng: 101.75081 };
 
@@ -18,9 +21,12 @@ const polylineOptions = {
 export default function FleetPage({ params }: { params: any }) {
   const { isLoaded } = useGoogleMapsLoader();
 
+  const { usv } = useUsv(params.id);
   const { usvData, mutate } = useUsvData(params.id);
 
   const [map, setMap] = useState(null);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const onLoad = useCallback(function callback(map: any) {
     const bounds = new window.google.maps.LatLngBounds(center);
@@ -84,22 +90,40 @@ export default function FleetPage({ params }: { params: any }) {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h1 className="text-base font-semibold leading-6 text-gray-900">
-                USVs
-              </h1>
+              <div className="flex flex-row gap-x-4">
+                <h1 className="text-base font-semibold leading-6 text-gray-900">
+                  USVs
+                </h1>
+                <div className="flex items-center gap-x-1.5">
+                  <div className="flex-none rounded-full bg-green-500/20 p-1">
+                    <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
+                  </div>
+                  <p className="text-xs leading-5 text-gray-500">Live</p>
+                </div>
+              </div>
               <p className="mt-2 text-sm text-gray-700">
                 A list of all the USVs and their current location, speed, and
                 heading information.
               </p>
             </div>
-            {/* <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-              <button
-                type="button"
-                className="block rounded-md bg-teal-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
-              >
-                Add CSV records
-              </button>
-            </div> */}
+            <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+              <div className="flex flex-row space-x-2">
+                <button
+                  type="button"
+                  className="block rounded-md bg-teal-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+                  onClick={() => setOpenEditModal(true)}
+                >
+                  Edit {usv?.name}
+                </button>
+                <button
+                  type="button"
+                  className="block rounded-md bg-red-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                  onClick={() => setOpenDeleteModal(true)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -180,6 +204,13 @@ export default function FleetPage({ params }: { params: any }) {
           </div>
         </div>
       </div>
+
+      <EditUSVModal open={openEditModal} setOpen={setOpenEditModal} usv={usv} />
+      <DeleteUSVModal
+        open={openDeleteModal}
+        setOpen={setOpenDeleteModal}
+        usv={usv}
+      />
     </div>
   );
 }

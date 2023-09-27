@@ -1,18 +1,21 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Bars3Icon,
-  ChartPieIcon,
   Cog6ToothIcon,
   GlobeAsiaAustraliaIcon,
   HomeIcon,
   MapPinIcon,
+  UserPlusIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import useUser from "@/hooks/useUser";
+import { async } from "validate.js";
+import axios from "axios";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
@@ -40,8 +43,22 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, isValidating } = useUser();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    if (!user && !isValidating) router.push("/login");
+  }, [user, isValidating]);
+
+  const updatedNavigation =
+    user?.privilege === 1
+      ? [
+          ...navigation,
+          { name: "Create New User", href: "/register", icon: UserPlusIcon },
+        ]
+      : navigation;
 
   return (
     <>
@@ -156,7 +173,7 @@ export default function ProtectedLayout({
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
-                    {navigation.map((item) => (
+                    {updatedNavigation.map((item) => (
                       <li key={item.name}>
                         <Link
                           href={item.href}
@@ -178,18 +195,23 @@ export default function ProtectedLayout({
                   </ul>
                 </li>
                 <li className="-mx-6 mt-auto">
-                  <Link
-                    href="#"
-                    className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
+                  <button
+                    onClick={async () => {
+                      await axios.delete("/api/auth/logout");
+                      router.push("/");
+                    }}
+                    className="w-full flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
                   >
-                    <img
-                      className="h-8 w-8 rounded-full bg-gray-800"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
+                    {user && (
+                      <img
+                        className="h-8 w-8 rounded-full bg-gray-800"
+                        src={`https://ui-avatars.com/api/${user.username}/128/random`}
+                        alt=""
+                      />
+                    )}
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
-                  </Link>
+                    <span aria-hidden="true">{user?.username}</span>
+                  </button>
                 </li>
               </ul>
             </nav>

@@ -93,9 +93,15 @@ export default function FleetsPage() {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
                       >
-                        Name
+                        ID
                       </th>
                       <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Name
+                      </th>
+                      {/* <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
@@ -112,7 +118,7 @@ export default function FleetsPage() {
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
                         Heading
-                      </th>
+                      </th> */}
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -131,9 +137,12 @@ export default function FleetsPage() {
                     {(usvs || []).map((usv) => (
                       <tr key={usv.name}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                          {usv.name}
+                          {usv.id}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {usv.name}
+                        </td>
+                        {/* <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {!usv.latitude
                             ? "-"
                             : (usv.latitude / 100).toFixed(5) +
@@ -145,7 +154,7 @@ export default function FleetsPage() {
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {usv.heading?.toFixed(2) || "-"}
-                        </td>
+                        </td> */}
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {usv.status}
                         </td>
