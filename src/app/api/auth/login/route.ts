@@ -1,5 +1,5 @@
 import getDb from "@/utils/server/getDb";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
