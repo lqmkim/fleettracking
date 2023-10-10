@@ -36,14 +36,7 @@ export default function FleetsPage() {
           <GoogleMap
             mapContainerStyle={{ width: "100%", height: "100%" }}
             // @ts-ignore
-            center={
-              usvs?.[0]
-                ? {
-                    lat: usvs?.[0].latitude / 100,
-                    lng: usvs?.[0].longitude / 100,
-                  }
-                : center
-            }
+            center={center}
             zoom={10}
             onLoad={onLoad}
             onUnmount={onUnmount}
