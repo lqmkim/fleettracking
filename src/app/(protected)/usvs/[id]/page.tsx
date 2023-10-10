@@ -1,6 +1,6 @@
 "use client";
 
-import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import useGoogleMapsLoader from "@/utils/client/useGoogleMapsLoader";
@@ -11,12 +11,6 @@ import EditUSVModal from "./EditUSVModal";
 import DeleteUSVModal from "./DeleteUSVModal";
 
 const center = { lat: 3.23542, lng: 101.75081 };
-
-const polylineOptions = {
-  strokeColor: "#FF0000",
-  strokeOpacity: 1.0,
-  strokeWeight: 2,
-};
 
 export default function FleetPage({ params }: { params: any }) {
   const { isLoaded } = useGoogleMapsLoader();
@@ -66,14 +60,6 @@ export default function FleetPage({ params }: { params: any }) {
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            <Polyline
-              path={usvData?.map((x) => ({
-                lat: x.latitude / 100,
-                lng: x.longitude / 100,
-              }))}
-              options={polylineOptions}
-            />
-
             {usvData?.map((data, index) => (
               <Marker
                 key={index}
