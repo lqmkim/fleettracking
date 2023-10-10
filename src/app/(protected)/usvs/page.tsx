@@ -41,15 +41,7 @@ export default function FleetsPage() {
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            {usvs?.map((usv, index) => (
-              <Marker
-                key={index}
-                position={{
-                  lat: usv.latitude / 100,
-                  lng: usv.longitude / 100,
-                }}
-              />
-            ))}
+            {/*  */}
           </GoogleMap>
         )}
       </div>
