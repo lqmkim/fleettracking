@@ -46,21 +46,22 @@ export default function FleetPage({ params }: { params: any }) {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (usvData && usvData.length !== 0)
+      // @ts-ignore
+      map?.panTo({
+        lat: usvData[0].latitude / 100,
+        lng: usvData[0].longitude / 100,
+      });
+  }, [usvData]);
+
   return (
     <div>
       <div className="h-80 overflow-hidden rounded-lg bg-white shadow">
         {isLoaded && (
           <GoogleMap
             mapContainerStyle={{ width: "100%", height: "100%" }}
-            // @ts-ignore
-            center={
-              usvData?.[0]
-                ? {
-                    lat: usvData?.[0].latitude / 100,
-                    lng: usvData?.[0].longitude / 100,
-                  }
-                : center
-            }
+            center={center}
             zoom={10}
             onLoad={onLoad}
             onUnmount={onUnmount}
@@ -164,8 +165,8 @@ export default function FleetPage({ params }: { params: any }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {(usvData || []).map((item) => (
-                      <tr key={item.name}>
+                    {(usvData || []).map((item, index) => (
+                      <tr key={index}>
                         <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6 lg:pl-8">
                           {(item.latitude / 100).toFixed(5) +
                             ", " +
