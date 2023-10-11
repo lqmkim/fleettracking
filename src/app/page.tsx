@@ -122,18 +122,6 @@ export default function IndexPage() {
 
             <div className="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
               <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-                <div className="hidden sm:mb-10 sm:flex">
-                  <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-500 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                    Anim aute id magna aliqua ad ad non deserunt sunt.{" "}
-                    <Link
-                      href="#"
-                      className="whitespace-nowrap font-semibold text-teal-600"
-                    >
-                      <span className="absolute inset-0" aria-hidden="true" />
-                      Read more <span aria-hidden="true">&rarr;</span>
-                    </Link>
-                  </div>
-                </div>
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                   Fleet Tracking
                 </h1>
