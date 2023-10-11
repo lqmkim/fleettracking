@@ -53,8 +53,8 @@ export default function FleetPage() {
     if (usvData && usvData.length !== 0)
       // @ts-ignore
       map?.panTo({
-        lat: usvData[0].latitude / 100,
-        lng: usvData[0].longitude / 100,
+        lat: usvData[0].latitude,
+        lng: usvData[0].longitude,
       });
   }, [usvData]);
 
@@ -71,8 +71,8 @@ export default function FleetPage() {
           >
             <Polyline
               path={usvData?.map((x) => ({
-                lat: x.latitude / 100,
-                lng: x.longitude / 100,
+                lat: x.latitude,
+                lng: x.longitude,
               }))}
               options={polylineOptions}
             />
@@ -81,8 +81,8 @@ export default function FleetPage() {
               <Marker
                 key={index}
                 position={{
-                  lat: data.latitude / 100,
-                  lng: data.longitude / 100,
+                  lat: data.latitude,
+                  lng: data.longitude,
                 }}
               />
             ))}
