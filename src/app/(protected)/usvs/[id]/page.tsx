@@ -94,12 +94,12 @@ export default function FleetPage({ params }: { params: any }) {
                 <h1 className="text-base font-semibold leading-6 text-gray-900">
                   USVs
                 </h1>
-                <div className="flex items-center gap-x-1.5">
+                {/* <div className="flex items-center gap-x-1.5">
                   <div className="flex-none rounded-full bg-green-500/20 p-1">
                     <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
                   </div>
                   <p className="text-xs leading-5 text-gray-500">Live</p>
-                </div>
+                </div> */}
               </div>
               <p className="mt-2 text-sm text-gray-700">
                 A list of all the USVs and their current location, speed, and
