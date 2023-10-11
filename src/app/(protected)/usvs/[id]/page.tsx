@@ -1,8 +1,7 @@
 "use client";
 
 import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
-import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
+import { useCallback, useState } from "react";
 import useGoogleMapsLoader from "@/utils/client/useGoogleMapsLoader";
 import useUsvData from "@/hooks/useUsvData";
 import moment from "moment";
@@ -21,8 +20,8 @@ const polylineOptions = {
 export default function FleetPage({ params }: { params: any }) {
   const { isLoaded } = useGoogleMapsLoader();
 
-  const { usv } = useUsv(params.id);
-  const { usvData, mutate } = useUsvData(params.id);
+  const { usv } = useUsv(params?.id || "");
+  const { usvData } = useUsvData(params?.id || "");
 
   const [map, setMap] = useState(null);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -39,21 +38,21 @@ export default function FleetPage({ params }: { params: any }) {
     setMap(null);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      mutate();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     mutate();
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
-  useEffect(() => {
-    if (usvData && usvData.length !== 0)
-      // @ts-ignore
-      map?.panTo({
-        lat: usvData[0].latitude / 100,
-        lng: usvData[0].longitude / 100,
-      });
-  }, [usvData]);
+  // useEffect(() => {
+  //   if (usvData && usvData.length !== 0)
+  //     // @ts-ignore
+  //     map?.panTo({
+  //       lat: usvData[0].latitude / 100,
+  //       lng: usvData[0].longitude / 100,
+  //     });
+  // }, [usvData]);
 
   return (
     <div>

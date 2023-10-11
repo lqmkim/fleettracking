@@ -35,7 +35,6 @@ export default function FleetsPage() {
         {isLoaded && (
           <GoogleMap
             mapContainerStyle={{ width: "100%", height: "100%" }}
-            // @ts-ignore
             center={center}
             zoom={10}
             onLoad={onLoad}
