@@ -5,7 +5,7 @@ import useUsvData from "@/hooks/useUsvData";
 import useGoogleMapsLoader from "@/utils/client/useGoogleMapsLoader";
 import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
 import { redirect, useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import EditUSVModal from "./EditUSVModal";
 import DeleteUSVModal from "./DeleteUSVModal";
 import moment from "moment";
@@ -25,7 +25,7 @@ export default function FleetPage() {
   const id = searchParams.get("id");
   if (!id) redirect("/usvs");
   const { usv } = useUsv(id);
-  const { usvData } = useUsvData(id);
+  const { usvData, mutate } = useUsvData(id);
 
   const [map, setMap] = useState(null);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -41,6 +41,22 @@ export default function FleetPage() {
   const onUnmount = useCallback(function callback(map: any) {
     setMap(null);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      mutate();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (usvData && usvData.length !== 0)
+      // @ts-ignore
+      map?.panTo({
+        lat: usvData[0].latitude / 100,
+        lng: usvData[0].longitude / 100,
+      });
+  }, [usvData]);
 
   return (
     <div>
@@ -82,12 +98,12 @@ export default function FleetPage() {
                 <h1 className="text-base font-semibold leading-6 text-gray-900">
                   USVs
                 </h1>
-                {/* <div className="flex items-center gap-x-1.5">
-            <div className="flex-none rounded-full bg-green-500/20 p-1">
-              <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
-            </div>
-            <p className="text-xs leading-5 text-gray-500">Live</p>
-          </div> */}
+                <div className="flex items-center gap-x-1.5">
+                  <div className="flex-none rounded-full bg-green-500/20 p-1">
+                    <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
+                  </div>
+                  <p className="text-xs leading-5 text-gray-500">Live</p>
+                </div>
               </div>
               <p className="mt-2 text-sm text-gray-700">
                 A list of all the USVs and their current location, speed, and
