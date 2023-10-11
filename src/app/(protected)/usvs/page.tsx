@@ -144,7 +144,7 @@ export default function FleetsPage() {
                         </td>
                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
                           <Link
-                            href={"/usvs/" + usv.id}
+                            href={"/usvs/view?id=" + usv.id}
                             className="text-teal-600 hover:text-teal-900"
                           >
                             Details<span className="sr-only">, {usv.name}</span>
