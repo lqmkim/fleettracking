@@ -1,3 +1,5 @@
+import FleetPageClient from "./FleetPageClient";
+
 export default function FleetPage() {
-  return <div>hmm</div>;
+  return <FleetPageClient />;
 }
