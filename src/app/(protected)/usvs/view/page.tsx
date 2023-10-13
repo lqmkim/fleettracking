@@ -77,15 +77,14 @@ export default function FleetPage() {
               options={polylineOptions}
             />
 
-            {usvData?.map((data, index) => (
+            {usvData?.length !== 0 && (
               <Marker
-                key={index}
                 position={{
-                  lat: data.latitude,
-                  lng: data.longitude,
+                  lat: usvData?.[0].latitude,
+                  lng: usvData?.[0].longitude,
                 }}
               />
-            ))}
+            )}
           </GoogleMap>
         )}
       </div>
