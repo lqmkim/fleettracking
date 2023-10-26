@@ -42,12 +42,12 @@ export default function FleetPage() {
     setMap(null);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      mutate();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     mutate();
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   useEffect(() => {
     if (usvData && usvData.length !== 0)
