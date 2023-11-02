@@ -3,7 +3,7 @@
 import useUsv from "@/hooks/useUsv";
 import useUsvData from "@/hooks/useUsvData";
 import useGoogleMapsLoader from "@/utils/client/useGoogleMapsLoader";
-import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, Polyline } from "@react-google-maps/api";
 import { redirect, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import EditUSVModal from "./EditUSVModal";
@@ -78,7 +78,7 @@ export default function FleetPage() {
             />
 
             {usvData?.length !== 0 && (
-              <Marker
+              <MarkerF
                 position={{
                   lat: usvData?.[0].latitude,
                   lng: usvData?.[0].longitude,
@@ -170,9 +170,9 @@ export default function FleetPage() {
                     {(usvData || []).map((item, index) => (
                       <tr key={index}>
                         <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6 lg:pl-8">
-                          {(item.latitude / 100).toFixed(5) +
+                          {(item.latitude).toFixed(5) +
                             ", " +
-                            (item.longitude / 100).toFixed(5)}
+                            (item.longitude).toFixed(5)}
                         </td>
                         <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
                           {item.speed.toFixed(2)}
@@ -188,8 +188,8 @@ export default function FleetPage() {
                             onClick={() =>
                               // @ts-ignore
                               map?.panTo({
-                                lat: item.latitude / 100,
-                                lng: item.longitude / 100,
+                                lat: item.latitude,
+                                lng: item.longitude,
                               })
                             }
                             className="text-teal-600 hover:text-teal-900"
