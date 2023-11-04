@@ -1,18 +1,20 @@
 "use client";
 
 import useUsvs from "@/hooks/useUsvs";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { useCallback, useState } from "react";
+import useLatestLocation from "@/hooks/useLatestLocation";
+import { GoogleMap, MarkerF, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { useCallback, useState, useEffect } from "react";
 import NewUSVModal from "./NewUSVModal";
 import Link from "next/link";
 import useGoogleMapsLoader from "@/utils/client/useGoogleMapsLoader";
 
-const center = { lat: 3.23542, lng: 101.75081 };
+const center = { lat: 3.25225, lng: 101.72960 };
 
 export default function FleetsPage() {
   const { isLoaded } = useGoogleMapsLoader();
 
   const { usvs } = useUsvs();
+  const { LatLoc }  = useLatestLocation();
 
   const [openNewUsvModal, setOpenNewUsvModal] = useState(false);
 
@@ -29,18 +31,43 @@ export default function FleetsPage() {
     setMap(null);
   }, []);
 
+  useEffect(() => {
+    if (LatLoc && LatLoc.length !== 0)
+      // @ts-ignore
+      map?.panTo({
+        lat: LatLoc[0].latitude,
+        lng: LatLoc[0].longitude,
+      });
+  }, [LatLoc]);
+
+  //test
+  //const { usvData, mutate } = useUsvData(id);
+//end test
   return (
     <div>
       <div className="h-80 overflow-hidden rounded-lg bg-white shadow">
         {isLoaded && (
           <GoogleMap
+              options={{
+                disableDefaultUI: true,
+              }}
             mapContainerStyle={{ width: "100%", height: "100%" }}
             center={center}
-            zoom={10}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-          >
-            {/*  */}
+              zoom={10}
+              onLoad={onLoad}
+              onUnmount={onUnmount}
+              ref={map}
+            >
+              {LatLoc?.map((usv, index) => (
+                <MarkerF
+                  key={`marker-${index}`}
+                  position={{
+                    lat: usv.latitude,
+                    lng: usv.longitude,
+                  }}
+                />
+              ))}
+
           </GoogleMap>
         )}
       </div>
