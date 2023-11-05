@@ -31,18 +31,19 @@ export default function FleetsPage() {
     setMap(null);
   }, []);
 
-  useEffect(() => {
-    if (LatLoc && LatLoc.length !== 0)
-      // @ts-ignore
-      map?.panTo({
-        lat: LatLoc[0].latitude,
-        lng: LatLoc[0].longitude,
-      });
-  }, [LatLoc]);
+//for zooming to see all location
+  if (LatLoc && LatLoc.length > 0) {
+    const bounds = new google.maps.LatLngBounds();
 
-  //test
-  //const { usvData, mutate } = useUsvData(id);
-//end test
+    LatLoc.forEach((location) => {
+      bounds.extend(new google.maps.LatLng(location.latitude, location.longitude));
+    });
+
+    //@ts-ignore
+    map?.fitBounds(bounds);
+  }
+//end zoom
+
   return (
     <div>
       <div className="h-80 overflow-hidden rounded-lg bg-white shadow">
@@ -53,7 +54,7 @@ export default function FleetsPage() {
               }}
             mapContainerStyle={{ width: "100%", height: "100%" }}
             center={center}
-              zoom={10}
+              zoom={13}
               onLoad={onLoad}
               onUnmount={onUnmount}
               ref={map}
