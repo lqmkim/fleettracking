@@ -16,5 +16,7 @@ export async function PATCH(request: Request, { params }: any) {
     LIMIT 1`
   );
 
+  await db.end()
+
   return NextResponse.json({}, { status: 200 });
 }

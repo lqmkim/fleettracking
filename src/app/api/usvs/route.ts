@@ -18,6 +18,8 @@ export async function GET(request: Request) {
     LIMIT ${(page - 1) * ITEMS_PER_PAGE}, ${ITEMS_PER_PAGE}`
   );
 
+  await db.end()
+
   return NextResponse.json({ usvs }, { status: 200 });
 }
 
@@ -33,6 +35,8 @@ export async function POST(request: Request) {
     `INSERT INTO usvs (id, name)
     VALUES ('${id}', '${name}')`
   );
+
+  await db.end()
 
   return NextResponse.json({}, { status: 201 });
 }

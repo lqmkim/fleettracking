@@ -24,6 +24,8 @@ export async function GET() {
     JOIN users ON maintenances.maintenance_personnel_id = users.id`
   );
 
+  await db.end()
+
   return NextResponse.json({ maintenances }, { status: 200 });
 }
 
@@ -52,6 +54,8 @@ export async function POST(request: Request) {
     `INSERT INTO maintenances (usv_id, repair_job, actions, maintenance_personnel_id, timestamp)
     VALUES ('${usv_id}', '${repair_job}', '${actions}', ${maintenance_personnel_id}, '${timestamp}')`
   );
+
+  await db.end()
 
   return NextResponse.json({}, { status: 200 });
 }

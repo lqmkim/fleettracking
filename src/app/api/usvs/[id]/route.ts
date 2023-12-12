@@ -15,6 +15,8 @@ export async function GET(request: Request, { params }: any) {
   );
   const usv = usvs[0];
 
+  await db.end()
+
   return NextResponse.json({ usv }, { status: 200 });
 }
 
@@ -33,6 +35,8 @@ export async function PATCH(request: Request, { params }: any) {
     LIMIT 1`
   );
 
+  await db.end()
+
   return NextResponse.json({}, { status: 200 });
 }
 
@@ -47,6 +51,8 @@ export async function DELETE(request: Request, { params }: any) {
     WHERE id = '${params.id}'
     LIMIT 1`
   );
+
+  await db.end()
 
   return NextResponse.json({}, { status: 200 });
 }

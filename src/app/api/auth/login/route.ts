@@ -42,5 +42,7 @@ export async function POST(request: Request) {
     maxAge: 60 * 60 * 24 * 30,
   });
 
+  await db.end()
+
   return NextResponse.json({}, { status: 200 });
 }

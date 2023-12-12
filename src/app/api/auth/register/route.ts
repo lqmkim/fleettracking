@@ -38,5 +38,7 @@ export async function POST(request: Request) {
     VALUES ('${username}', '${hashedPassword}', '${role}')`
   );
 
+  await db.end()
+
   return NextResponse.json({}, { status: 200 });
 }

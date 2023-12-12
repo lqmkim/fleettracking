@@ -24,6 +24,8 @@ export async function GET() {
     JOIN users ON missions.manager_id = users.id`
   );
 
+  await db.end()
+
   return NextResponse.json({ missions }, { status: 200 });
 }
 
@@ -50,6 +52,8 @@ export async function POST(request: Request) {
     `INSERT INTO missions (objective, usv_id, scheduled_at, manager_id)
     VALUES ('${objective}', '${usv_id}', '${scheduled_at}', ${manager_id})`
   );
+
+  await db.end()
 
   return NextResponse.json({}, { status: 200 });
 }

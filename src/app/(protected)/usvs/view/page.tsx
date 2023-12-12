@@ -42,12 +42,12 @@ export default function FleetPage() {
     setMap(null);
   }, []);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     mutate();
-  //   }, 10000);
-  //   return () => clearInterval(interval);
-  // }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      mutate();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (usvData && usvData.length !== 0)
@@ -170,9 +170,9 @@ export default function FleetPage() {
                     {(usvData || []).map((item, index) => (
                       <tr key={index}>
                         <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6 lg:pl-8">
-                          {(item.latitude / 100).toFixed(5) +
+                          {(item.latitude).toFixed(5) +
                             ", " +
-                            (item.longitude / 100).toFixed(5)}
+                            (item.longitude).toFixed(5)}
                         </td>
                         <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
                           {item.speed.toFixed(2)}

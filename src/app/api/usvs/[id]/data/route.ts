@@ -21,5 +21,7 @@ export async function GET(request: Request, { params }: any) {
     LIMIT ${(page - 1) * ITEMS_PER_PAGE}, ${ITEMS_PER_PAGE}`
   );
 
+  await db.end()
+
   return NextResponse.json({ usvData }, { status: 200 });
 }

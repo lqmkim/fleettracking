@@ -23,6 +23,8 @@ export async function GET() {
   );
   const totalDataPoints = dataPointsArr[0].count;
 
+  await db.end()
+
   return NextResponse.json(
     { totalUsers, totalUsvs, totalDataPoints },
     { status: 200 }

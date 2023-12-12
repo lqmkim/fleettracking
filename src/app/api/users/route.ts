@@ -14,6 +14,8 @@ export async function GET() {
     `SELECT id, username, privilege, role FROM users`
   );
 
+  await db.end()
+
   return NextResponse.json({ users }, { status: 200 });
 }
 
@@ -50,6 +52,8 @@ export async function POST(request: Request) {
     `INSERT INTO users (username, password, role)
     VALUES ('${username}', '${hashedPassword}', '${role}')`
   );
+
+  await db.end()
 
   return NextResponse.json({}, { status: 200 });
 }
