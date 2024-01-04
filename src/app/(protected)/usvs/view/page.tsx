@@ -44,8 +44,8 @@ export default function FleetPage() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      mutate();
-    }, 10000);
+      mutate();  
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
